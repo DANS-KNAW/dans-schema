@@ -20,26 +20,16 @@
            targetNamespace="http://easy.dans.knaw.nl/easy/dataset-administrative-metadata/"
            xmlns:damd="http://easy.dans.knaw.nl/easy/dataset-administrative-metadata/"
            xmlns:wfs="http://easy.dans.knaw.nl/easy/workflow/">
-    <xs:import namespace="http://easy.dans.knaw.nl/easy/workflow/" schemaLocation="http://easy.dans.knaw.nl/schemas/bag/metadata/amd/wfs.xsd"/>
+    <xs:import namespace="http://easy.dans.knaw.nl/easy/workflow/" schemaLocation="https://easy.dans.knaw.nl/schemas/bag/metadata/amd/2012/wfs.xsd"/>
     <!-- import the versioned schema of wfs -->
     <xs:annotation>
-        <xs:documentation>
-            Schema to describe the administrative metadata for datasets in EASY, version 0.1.
-
-            Changes from 2012 to 2022
-
-            * Add element lastStateChange
-            * elements in administrative-md in a choice instead of a sequence
-            * be more lenient for stateChangeDate, allow also dates and empty elements
-            
-        </xs:documentation>
+        <xs:documentation>Schema to describe the administrative metadata for datasets in EASY, version 0.1.</xs:documentation>
     </xs:annotation>
     <xs:element name="administrative-md">
         <xs:complexType>
-            <xs:choice maxOccurs="unbounded">
+            <xs:sequence>
                 <xs:element name="datasetState" form="unqualified" type="damd:DatasetStateType"/>
-                <xs:element name="previousState" form="unqualified" type="damd:DatasetStateType" minOccurs="0"/>
-                <xs:element name="lastStateChange" form="unqualified" minOccurs="0"></xs:element>
+                <xs:element name="previousState" form="unqualified" type="damd:DatasetStateType"/>
                 <xs:element name="depositorId" form="unqualified" type="xs:NCName" minOccurs="1" maxOccurs="1">
                     <xs:annotation>
                         <xs:documentation>The username of the depositor. This is NOT the creator of the dataset.</xs:documentation>
@@ -60,7 +50,7 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element ref="damd:workflowData"/>
-            </xs:choice>
+            </xs:sequence>
             <xs:attribute name="version" use="required" type="xs:string" fixed="0.1"/>
         </xs:complexType>
     </xs:element>
@@ -69,21 +59,10 @@
             <xs:sequence>
                 <xs:element name="fromState" form="unqualified" type="xs:NCName"/>
                 <xs:element name="toState" form="unqualified" type="xs:NCName"/>
-                <xs:element name="changeDate" form="unqualified" type="damd:date-or-dateTime-or-nothing"/>
+                <xs:element name="changeDate" form="unqualified" type="xs:dateTime"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-
-    <xs:simpleType name="empty-string">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value=""/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="date-or-dateTime-or-nothing">
-        <xs:union memberTypes="xs:date xs:dateTime damd:empty-string"/>
-    </xs:simpleType>
-
     <xs:element name="workflowData">
         <xs:complexType>
             <xs:sequence>
