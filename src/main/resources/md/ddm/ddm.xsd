@@ -17,7 +17,7 @@
 
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:ddm="http://easy.dans.knaw.nl/schemas/md/ddm/"
+           xmlns:ddm="http://schemas.dans.knaw.nl/dataset/ddm-v2/"
            xmlns:dc="http://purl.org/dc/elements/1.1/"
            xmlns:dcterms="http://purl.org/dc/terms/"
            xmlns:dcx="http://easy.dans.knaw.nl/schemas/dcx/"
@@ -25,7 +25,7 @@
            xmlns:narcis="http://easy.dans.knaw.nl/schemas/vocab/narcis-type/"
            xmlns:id-type="http://easy.dans.knaw.nl/schemas/vocab/identifier-type/"
            xmlns:datacite="http://datacite.org/schema/kernel-4"
-           targetNamespace="http://easy.dans.knaw.nl/schemas/md/ddm/"
+           targetNamespace="http://schemas.dans.knaw.nl/dataset/ddm-v2/"
            elementFormDefault="qualified" attributeFormDefault="unqualified">
 
     <!-- =================================================================================== -->
@@ -35,54 +35,10 @@
             This schema specifies a metadata-format for describing datasets.
             An instance of this metadata-format can be used for ingest of datasets with the Sword protocol.
 
-            Created 2012-10-26
-            Last modified 2021-03-22
-
-            Change since 2022/01/21
-            * Change uri of inCollection relation
-
-            Change since 2021/03/22
-            * Add datesOfCollection
             
-            Change since 2021/02/18
-            * Add inCollection relation
+            Created ddm-v2 on 2022-10-25
 
-            Change since 2021/01/20
-            * Add language substitution element to record iso639-2 code
-
-            Change since 2021/01/07
-            * Allow only one title in profile
-            * Add acquisitionMethod (verwervingswijze)
-            * Add report number
-
-            Change since 2020/03/03
-            * Add Funding element
-
-            Change since 2019/10
-            * no longer allow an X as 17th digit, lowercase 'x' is no longer allowed
-
-            Change since 2019/07
-            * Remove GROUP_ACCESS from EasyAccessCategoryType
-            * Remove 'group' attribute from ddm:accessRights
-
-            Change since 2019/01
-            * allow scheme attribute in all ddm:LinkedRelationType, restricted to known EASY-schemes
-
-            Change since 2018/05
-            * Upgrade to 2019/01/dcx-dai
-            * Upgrade to datacite v4.1
-
-            Change since 2018/03
-            * Add attribute 'group' in ddm:accessRights
-
-            Change since 2018/02
-            * Use 2018/03/dcx-dai.xsd
-            * Introduce ddm:description and add descriptionType-attribute
-
-            Change since 2017/09
-            * Add ddm:temporal
-
-            Copyright (c) 2012 DANS-KNAW
+            Copyright (c) 2022 DANS-KNAW
         </xs:documentation>
     </xs:annotation>
 
@@ -112,7 +68,7 @@
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Root element of DANS Dataset Metadata. DDM-instances MUST have one ddm:profile element and MAY have
-                one ddm:dcmiMetadata element and one ddm:additional-xml element.
+                one ddm:dcmiMetadata element.
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
@@ -164,7 +120,7 @@
                         </xs:documentation>
                     </xs:annotation>
                 </xs:element>
-                <xs:element ref="ddm:additional-xml" minOccurs="0"/>
+                
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -401,22 +357,6 @@
     <xs:element name="requires" substitutionGroup="ddm:linkedRelation"/>
 
     <!-- =================================================================================== -->
-    <xs:element name="additional-xml">
-        <xs:annotation>
-            <xs:documentation>
-                Any valid xml-element will do as a child of this element, as long as its namespace is ##other.
-                If a schemaLocation is provided on the element, validating agents will validate the provided xml against that schema.
-                The element may be complex.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-            <xs:sequence>
-                <xs:any namespace="##other" processContents="lax" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- =================================================================================== -->
     <xs:complexType name="profileType">
         <xs:annotation>
             <xs:documentation xml:lang="en">
@@ -424,13 +364,14 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element ref="dc:title" maxOccurs="1"/>
+            <xs:element ref="dc:title"/>
             <xs:element ref="dc:description" maxOccurs="unbounded"/>
             <xs:element ref="dc:creator" maxOccurs="unbounded"/>
             <xs:element ref="ddm:created"/>
             <xs:element ref="ddm:available"/>
             <xs:element ref="ddm:audience" maxOccurs="unbounded"/>
             <xs:element ref="ddm:accessRights"/>
+            <xs:element ref="ddm:personalData"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -556,6 +497,43 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <!-- =================================================================================== -->
+    <xs:element name="personalData" substitutionGroup="dcterms:rights" type="ddm:RightsType">
+    </xs:element>
+    
+    <xs:complexType name="RightsType">
+        <xs:complexContent>
+            <xs:extension base="dc:SimpleLiteral">
+                <xs:attribute name="present" use="required" type="ddm:personalDataPresentOption"/>
+            </xs:extension>        
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:simpleType name="personalDataPresentOption">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Yes">
+                <xs:annotation>
+                    <xs:documentation>
+                        Yes, the dataset contains personal data in the sense of the GDPR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="No">
+                <xs:annotation>
+                    <xs:documentation>
+                        No, the dataset does not contain personal data in the sense of the GDPR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="Unknown">
+                <xs:annotation>
+                    <xs:documentation>
+                        It is unknown whether the dataset contains personal data in the sense of the GDPR
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
     <!-- =================================================================================== -->
     <xs:element name="subject" substitutionGroup="dcterms:subject" type="ddm:SubjectType">
         <xs:annotation>
