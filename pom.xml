@@ -79,9 +79,19 @@
                         <artifactId>rpm-maven-plugin</artifactId>
                         <configuration combine.self="override">
                             <group>Applications/Archiving</group>
+                            <release>${rpm-release}</release>
+                            <vendor>${dans-provider-name}</vendor>
+                            <packager>${dans-provider-name}</packager>
+                            <name>${dans-provider-name}-${project.artifactId}</name>
+                            <defaultUsername>root</defaultUsername>
+                            <defaultGroupname>root</defaultGroupname>
+                            <license>Apache 2.0</license>
+                            <targetOS>Linux</targetOS>
+                            <defaultFilemode>744</defaultFilemode>
+                            <defaultDirmode>755</defaultDirmode>
                             <mappings>
                                 <mapping>
-                                    <directory>/var/www/html/schemas</directory>
+                                    <directory>/var/www/html/schemas/schemas.dans.knaw.nl/</directory>
                                     <sources>
                                         <source>
                                             <location>src/main/resources</location>
