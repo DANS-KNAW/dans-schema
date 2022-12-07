@@ -91,7 +91,7 @@
                             <defaultDirmode>755</defaultDirmode>
                             <mappings>
                                 <mapping>
-                                    <directory>/var/www/html/schemas/schemas.dans.knaw.nl/</directory>
+                                    <directory>/var/www/html/schemas.datastations.nl/</directory>
                                     <sources>
                                         <source>
                                             <location>src/main/resources</location>
