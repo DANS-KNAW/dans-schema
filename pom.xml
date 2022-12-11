@@ -32,7 +32,7 @@
     <inceptionYear>2022</inceptionYear>
     <scm>
         <tag>HEAD</tag>
-        <developerConnection>scm:git:https://github.com/DANS-KNAW/dans-schema</developerConnection>
+        <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
     </scm>
     <repositories>
         <repository>
