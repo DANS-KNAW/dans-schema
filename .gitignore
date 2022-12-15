@@ -3,3 +3,7 @@
 /*/target
 /*/target
 /.venv-mkdocs
+/*.releaseBackup
+/release.properties
+/*/*.releaseBackup
+/*/release.properties
