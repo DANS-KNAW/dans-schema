@@ -130,7 +130,7 @@
                             <group>Applications/Archiving</group>
                             <mappings combine.self="override">
                                 <mapping>
-                                    <directory>/var/www/html/schemas</directory>
+                                    <directory>/var/www/html/schemas.datastations.nl</directory>
                                     <sources>
                                         <source>
                                             <location>${project.build.directory}/schemas/</location>
