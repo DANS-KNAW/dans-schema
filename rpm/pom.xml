@@ -25,7 +25,7 @@
         <relativePath />
     </parent>
     <groupId>nl.knaw.dans</groupId>
-    <artifactId>dans-schema-rpm</artifactId>
+    <artifactId>dans-schema</artifactId>
     <version>0.3.2-SNAPSHOT</version>
     <name>DANS XML Schemas RPM Build</name>
     <inceptionYear>2022</inceptionYear>
@@ -37,7 +37,7 @@
     <dependencies>
         <dependency>
             <groupId>nl.knaw.dans</groupId>
-            <artifactId>dans-schema</artifactId>
+            <artifactId>dans-schema-lib</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -113,7 +113,7 @@
                                     <artifactItems>
                                         <artifactItem>
                                             <groupId>nl.knaw.dans</groupId>
-                                            <artifactId>dans-schema</artifactId>
+                                            <artifactId>dans-schema-lib</artifactId>
                                             <version>${project.version}</version>
                                             <outputDirectory>${project.build.directory}/schemas/</outputDirectory>
                                         </artifactItem>

@@ -55,7 +55,7 @@
 
     <modules>
         <module>rpm</module>
-        <module>schemas</module>
+        <module>lib</module>
     </modules>
 </project>
 
