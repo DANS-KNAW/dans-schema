@@ -18,105 +18,44 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>nl.knaw.dans.shared</groupId>
-        <artifactId>dans-mvn-plugin-defaults</artifactId>
-        <version>9.5.0</version>
-        <relativePath />
-    </parent>
-    <groupId>nl.knaw.dans</groupId>
-    <artifactId>dans-schema</artifactId>
-    <version>0.2.1-SNAPSHOT</version>
-    <name>DANS XML Schemas</name>
-    <inceptionYear>2022</inceptionYear>
-    <scm>
-        <tag>HEAD</tag>
-        <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
-    </scm>
-    <repositories>
-        <repository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
 
-    <profiles>
-        <profile>
-            <id>rpm</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-                <file>
-                    <exists>/usr/local/bin/rpm</exists>
-                </file>
-            </activation>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <targetPath>${project.build.directory}/version</targetPath>
-                        <includes>
-                            <include>version</include>
-                        </includes>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>rpm-maven-plugin</artifactId>
-                        <configuration combine.self="override">
-                            <group>Applications/Archiving</group>
-                            <release>${rpm-release}</release>
-                            <vendor>${dans-provider-name}</vendor>
-                            <packager>${dans-provider-name}</packager>
-                            <name>${dans-provider-name}-${project.artifactId}</name>
-                            <defaultUsername>root</defaultUsername>
-                            <defaultGroupname>root</defaultGroupname>
-                            <license>Apache 2.0</license>
-                            <targetOS>Linux</targetOS>
-                            <defaultFilemode>744</defaultFilemode>
-                            <defaultDirmode>755</defaultDirmode>
-                            <mappings>
-                                <mapping>
-                                    <directory>/var/www/html/schemas.datastations.nl/</directory>
-                                    <sources>
-                                        <source>
-                                            <location>src/main/resources</location>
-                                            <excludes>
-                                                <exclude>src/main/resources/version</exclude>
-                                            </excludes>
-                                        </source>
-                                        <source>
-                                            <location>${project.build.directory}/version</location>
-                                        </source>
-                                    </sources>
-                                </mapping>
-                            </mappings>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>attach-rpm</id>
-                                <goals>
-                                    <goal>attached-rpm</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+    <groupId>nl.knaw.dans.easy</groupId>
+    <artifactId>dans-schema-build</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <name>DANS XML Schema Definitions Build</name>
+    <description>Collection of metadata schema's used by DANS Data Stations</description>
+    <inceptionYear>2022</inceptionYear>
+
+    <packaging>pom</packaging>
+
+    <scm>
+        <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <modules>
+        <module>rpm</module>
+        <module>schemas</module>
+    </modules>
 </project>
 

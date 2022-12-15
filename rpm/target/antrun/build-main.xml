@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <echo message="Setting dynamic properties (default)" />
+    <echo message="Current value: skip-exec = ${skip-exec}" />
+    <condition property="isSnapshot">
+      <contains string="0.3.0-SNAPSHOT" substring="SNAPSHOT" />
+    </condition>
+    <condition property="isPomProject">
+      <equals arg2="pom" arg1="jar" />
+    </condition>
+    <echo message="isSnapshot = ${isSnapshot}" />
+    <echo message="isPomProject = ${isPomProject}" />
+    <condition property="skip-exec" value="true">
+      <isset property="isPomProject" />
+    </condition>
+    <condition property="skip-deploy" value="false">
+      <isset property="isPomProject" />
+    </condition>
+    <property name="skip-exec" value="false" />
+    <property name="skip-deploy" value="true" />
+    <condition property="rpm-repository-url" value="http://nexus.dans.knaw.nl/repository/rpm-snapshots">
+      <and>
+        <not>
+          <isset property="isPomProject" />
+        </not>
+        <isset property="isSnapshot" />
+      </and>
+    </condition>
+    <condition property="rpm-repository-url" value="http://nexus.dans.knaw.nl/repository/rpm-releases">
+      <and>
+        <not>
+          <isset property="isPomProject" />
+        </not>
+        <not>
+          <isset property="isSnapshot" />
+        </not>
+      </and>
+    </condition>
+    <echo message="rpm-repository-url = ${rpm-repository-url}" />
+  </target>
+</project>
