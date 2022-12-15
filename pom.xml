@@ -21,7 +21,7 @@
 
     <groupId>nl.knaw.dans.easy</groupId>
     <artifactId>dans-schema-build</artifactId>
-    <version>0.3.1</version>
+    <version>0.3.2-SNAPSHOT</version>
 
     <name>DANS XML Schema Definitions Build</name>
     <description>Collection of metadata schema's used by DANS Data Stations</description>
@@ -31,7 +31,7 @@
 
     <scm>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
-        <tag>v0.3.1</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <build>
