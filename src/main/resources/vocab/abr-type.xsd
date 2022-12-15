@@ -23,7 +23,7 @@
     elementFormDefault="qualified" attributeFormDefault="unqualified">
     
     <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-        schemaLocation="../extern/xml.xsd"/>
+        schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
 
     <xs:import namespace="http://purl.org/dc/elements/1.1/" 
     	schemaLocation="../extern/dc.xsd"/>
