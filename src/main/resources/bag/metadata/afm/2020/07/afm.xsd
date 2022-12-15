@@ -21,9 +21,9 @@
     targetNamespace="http://easy.dans.knaw.nl/schemas/bag/metadata/afm/">
 
     <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-        schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+        schemaLocation="../../../../../extern/xml.xsd"/>
     <xs:import namespace="http://purl.org/dc/terms/"
-        schemaLocation="https://dublincore.org/schemas/xmls/qdc/dcterms.xsd"/>
+        schemaLocation="../../../../../extern/dcterms.xsd"/>
 
     <xs:element name="hardware" substitutionGroup="dcterms:description">
         <xs:annotation>

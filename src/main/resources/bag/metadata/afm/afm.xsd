@@ -22,11 +22,11 @@
     targetNamespace="http://easy.dans.knaw.nl/schemas/bag/metadata/afm/">
 
     <xs:import namespace="http://www.w3.org/XML/1998/namespace"
-        schemaLocation="http://www.w3.org/2001/03/xml.xsd"/>
+        schemaLocation="../../../extern/xml.xsd"/>
     <xs:import namespace="http://purl.org/dc/terms/"
-        schemaLocation="https://easy.dans.knaw.nl/schemas/extern/dcterms.xsd"/>
+        schemaLocation="../../../extern/dcterms.xsd"/>
     <xs:import namespace="http://purl.org/dc/elements/1.1/"
-        schemaLocation="https://easy.dans.knaw.nl/schemas/extern/dc.xsd"/>
+        schemaLocation="../../../extern/dc.xsd"/>
 
     <xs:element name="hardware" substitutionGroup="dcterms:description">
         <xs:annotation>
