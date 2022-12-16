@@ -103,7 +103,7 @@
     <xs:element name="new" type="prov:ContentType"/>
     <xs:simpleType name="XmlFileScheme">
         <xs:restriction base="xs:anyURI">
-            <xs:enumeration value="http://easy.dans.knaw.nl/schemas/md/ddm/">
+            <xs:enumeration value="http://schemas.dans.knaw.nl/dataset/ddm-v2/">
                 <xs:annotation>
                     <xs:documentation>
                         The DANS Dataset Metadata scheme
