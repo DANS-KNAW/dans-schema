@@ -19,12 +19,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>nl.knaw.dans.shared</groupId>
-        <artifactId>dans-mvn-plugin-defaults</artifactId>
-        <version>9.5.0</version>
+        <groupId>nl.knaw.dans</groupId>
+        <artifactId>dd-parent</artifactId>
+        <version>0.1.2-SNAPSHOT</version>
         <relativePath />
     </parent>
-    <groupId>nl.knaw.dans</groupId>
     <artifactId>dans-schema-lib</artifactId>
     <version>0.6.1-SNAPSHOT</version>
     <name>DANS XML Schemas Resource JAR</name>
@@ -62,12 +61,6 @@
                         <exclude>src/main/resources/extern/*.xsd</exclude>
                         <exclude>src/main/resources/extern/**/*.xsd</exclude>
                     </excludes>
-                    <includes>
-                        <include>pom.xml</include>
-                        <include>src/test/scala/**</include>
-                        <include>src/main/resources/**/*.xsd</include>
-                        <include>src/main/resources/**/*.xml</include>
-                    </includes>
                 </configuration>
             </plugin>
         </plugins>

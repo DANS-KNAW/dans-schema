@@ -19,12 +19,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>nl.knaw.dans.shared</groupId>
-        <artifactId>dans-mvn-plugin-defaults</artifactId>
-        <version>9.5.0</version>
+        <groupId>nl.knaw.dans</groupId>
+        <artifactId>dd-parent-service</artifactId>
+        <version>0.1.2-SNAPSHOT</version>
         <relativePath />
     </parent>
-    <groupId>nl.knaw.dans</groupId>
     <artifactId>dans-schema</artifactId>
     <version>0.6.1-SNAPSHOT</version>
     <name>DANS XML Schemas RPM Build</name>
@@ -81,31 +80,19 @@
                         </includes>
                         <filtering>true</filtering>
                     </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <excludes>
-                            <exclude>version</exclude>
-                        </excludes>
-                    </resource>
                 </resources>
 
                 <plugins>
                     <plugin>
                         <artifactId>maven-antrun-plugin</artifactId>
                     </plugin>
-
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                    </plugin>
-
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
                             <execution>
-                                <id>test-resources</id>
-                                <phase>generate-test-resources</phase>
+                                <id>build-resources</id>
+                                <phase>generate-resources</phase>
                                 <goals>
                                     <goal>unpack</goal>
                                 </goals>
@@ -134,6 +121,9 @@
                                     <sources>
                                         <source>
                                             <location>${project.build.directory}/schemas/</location>
+                                            <excludes>
+                                                <exclude>META-INF/**</exclude>
+                                            </excludes>
                                         </source>
                                         <source>
                                             <location>${project.build.directory}/version/version</location>
@@ -142,16 +132,7 @@
                                 </mapping>
                             </mappings>
                         </configuration>
-                        <executions>
-                            <execution>
-                                <id>attach-rpm</id>
-                                <goals>
-                                    <goal>attached-rpm</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
