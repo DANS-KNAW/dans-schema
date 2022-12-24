@@ -58,8 +58,8 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration combine.children="append">
                     <excludes combine.self="override">
-                        <exclude>src/main/resources/extern/*.xsd</exclude>
-                        <exclude>src/main/resources/extern/**/*.xsd</exclude>
+                        <exclude>src/main/resources/extern/**</exclude>
+                        <exclude>src/main/resources/version</exclude>
                     </excludes>
                 </configuration>
             </plugin>
