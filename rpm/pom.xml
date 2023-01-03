@@ -25,11 +25,11 @@
         <relativePath />
     </parent>
     <artifactId>dans-schema</artifactId>
-    <version>0.6.1-SNAPSHOT</version>
+    <version>0.7.0</version>
     <name>DANS XML Schemas RPM Build</name>
     <inceptionYear>2022</inceptionYear>
     <scm>
-        <tag>HEAD</tag>
+        <tag>v0.7.0</tag>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
     </scm>
 
