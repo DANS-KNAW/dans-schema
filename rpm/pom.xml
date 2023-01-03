@@ -20,8 +20,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>nl.knaw.dans</groupId>
-        <artifactId>dd-parent-service</artifactId>
-        <version>0.1.2-SNAPSHOT</version>
+        <artifactId>dd-parent</artifactId>
+        <version>0.10.0</version>
         <relativePath />
     </parent>
     <artifactId>dans-schema</artifactId>
@@ -43,23 +43,26 @@
 
     <repositories>
         <repository>
-            <id>DANS</id>
+            <id>dans-releases</id>
             <releases>
                 <enabled>true</enabled>
             </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <url>https://maven.dans.knaw.nl/releases/</url>
+        </repository>
+        <repository>
+            <id>dans-snapshots</id>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <url>https://maven.dans.knaw.nl/snapshots/</url>
         </repository>
     </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
-
 
     <profiles>
         <profile>
@@ -129,6 +132,17 @@
                                 </mapping>
                             </mappings>
                         </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>nl.knaw.dans</groupId>
+                        <artifactId>dans-nexus-maven-plugin</artifactId>
                     </plugin>
                 </plugins>
             </build>

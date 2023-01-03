@@ -21,7 +21,7 @@
     <parent>
         <groupId>nl.knaw.dans</groupId>
         <artifactId>dd-parent</artifactId>
-        <version>0.1.2-SNAPSHOT</version>
+        <version>0.10.0</version>
         <relativePath />
     </parent>
     <artifactId>dans-schema-lib</artifactId>
@@ -32,6 +32,7 @@
         <tag>HEAD</tag>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
     </scm>
+
     <repositories>
         <repository>
             <id>DANS</id>
