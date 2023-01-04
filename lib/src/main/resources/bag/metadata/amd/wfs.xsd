@@ -17,9 +17,14 @@
 
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://easy.dans.knaw.nl/easy/workflow/"
-    xmlns:wfs="http://easy.dans.knaw.nl/easy/workflow/">
+           xmlns:wfs="http://easy.dans.knaw.nl/easy/workflow/">
     <xs:annotation>
-        <xs:documentation>The administrative metadata used to capture the workflow performed by DANS data managers.</xs:documentation>
+        <xs:documentation>
+            The administrative metadata used to capture the workflow performed by DANS data managers.
+
+            Changes from 2012 to 2022
+            * remark may be an empty element
+        </xs:documentation>
     </xs:annotation>
     <xs:element name="workflow">
         <xs:complexType>
@@ -42,9 +47,9 @@
                             <xs:element minOccurs="0" name="remark" form="unqualified">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="text" form="unqualified" type="xs:string"/>
-                                        <xs:element name="remarkerId" form="unqualified" type="xs:NCName"/>
-                                        <xs:element name="remarkDate" form="unqualified" type="xs:dateTime"/>
+                                        <xs:element name="text" form="unqualified" type="xs:string" minOccurs="0"/>
+                                        <xs:element name="remarkerId" form="unqualified" type="xs:NCName" minOccurs="0"/>
+                                        <xs:element name="remarkDate" form="unqualified" type="xs:dateTime" minOccurs="0"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
