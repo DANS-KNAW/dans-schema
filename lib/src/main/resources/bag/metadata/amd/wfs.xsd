@@ -65,6 +65,7 @@
                     </xs:complexType>
                 </xs:element>
                 <xs:element name="timeSpentWritable" form="unqualified" type="xs:boolean"/>
+                <xs:element name="timeSpent" form="unqualified" type="xs:string"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>
