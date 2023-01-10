@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>dans-schema</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Manual";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> dans-schema
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Manual</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description">DESCRIPTION</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#building-from-source">BUILDING FROM SOURCE</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">dans-schema</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Manual</li>
+    <li class="wy-breadcrumbs-aside">
+        <a href="https://github.com/DANS-KNAW/dans-schema/edit/master/docs/index.md"> Edit on DANS-KNAW/dans-schema</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="dans-schema">dans-schema<a class="headerlink" href="#dans-schema" title="Permanent link">&para;</a></h1>
+<p>DANS XML schemas</p>
+<h2 id="description">DESCRIPTION<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>The <a href="https://dans-knaw.github.io/dans-bagit-profile/versions/1.0.0/" target="_blank">DANS BagIt Profile v1</a> requires several XML metadata files. This project includes the XML schema files to validate those XML files. These
+schemas will be published on a public website. <!-- TODO: change text to point to website when it is up -->. Alternatively you can
+<a href="#building-from-source">clone and build this project</a> which will package site up both as a jar-file and as an RPM.</p>
+<div class="admonition warning">
+<p class="admonition-title">DANS Schema vs EASY Schema</p>
+<p>DANS Schema contains the schemas for the Data Stations. It is forked from the legacy project <a href="https://github.com/DANS-KNAW/easy-schema" target="_blank">easy-schema</a> which will be phased out with 
+EASY itself. </p>
+</div>
+<h2 id="building-from-source">BUILDING FROM SOURCE<a class="headerlink" href="#building-from-source" title="Permanent link">&para;</a></h2>
+<p>Prerequisites:</p>
+<ul>
+<li>Java 11 or higher</li>
+<li>Maven 3.3.3 or higher</li>
+<li>RPM</li>
+</ul>
+<p>Steps:</p>
+<div class="codehilite"><pre><span></span><code>git clone https://github.com/DANS-KNAW/dans-schema.git
+cd dans-schema 
+mvn clean install
+</code></pre></div>
+
+<p>If the <code>rpm</code> executable is found at <code>/usr/local/bin/rpm</code>, the build profile that includes the RPM packaging will be activated. If <code>rpm</code> is available, but at a
+different path, then activate it by using Maven's <code>-P</code> switch: <code>mvn -Prpm install</code>.</p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.3.0
+Build Date UTC : 2023-01-10 07:59:09.422857+00:00
+-->
