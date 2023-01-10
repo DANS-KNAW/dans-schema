@@ -40,7 +40,7 @@
                 <xs:element name="datasetState" form="unqualified" type="damd:DatasetStateType"/>
                 <xs:element name="previousState" form="unqualified" type="damd:DatasetStateType" minOccurs="0"/>
                 <xs:element name="lastStateChange" form="unqualified" minOccurs="0"></xs:element>
-                <xs:element name="depositorId" form="unqualified" type="xs:NCName" minOccurs="1" maxOccurs="1">
+                <xs:element name="depositorId" form="unqualified" type="xs:normalizedString" minOccurs="1" maxOccurs="1">
                     <xs:annotation>
                         <xs:documentation>The username of the depositor. This is NOT the creator of the dataset.</xs:documentation>
                     </xs:annotation>
