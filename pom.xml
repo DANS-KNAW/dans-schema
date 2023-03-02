@@ -28,7 +28,7 @@
     </parent>
 
     <artifactId>dans-schema-build</artifactId>
-    <version>0.10.0</version>
+    <version>0.10.1-SNAPSHOT</version>
 
     <name>DANS XML Schema Definitions Build</name>
     <description>Collection of metadata schema's used by DANS Data Stations</description>
@@ -38,7 +38,7 @@
 
     <scm>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
-        <tag>v0.10.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <repositories>
