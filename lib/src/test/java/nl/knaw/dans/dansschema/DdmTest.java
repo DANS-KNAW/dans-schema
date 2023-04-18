@@ -1,16 +1,16 @@
 package nl.knaw.dans.dansschema;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.stream.Stream;
 
 import static nl.knaw.dans.dansschema.XmlReader.readXmlString;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -68,22 +68,23 @@ public class DdmTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-        "src/test/resources/md/ddm/v1/example1.xml",
-        "src/test/resources/md/ddm/v1/example2.xml"})
-    void v1_resources_validate(String input) throws Exception {
-        // TODO parse directory for valueSource
-        assertThat(validatorV1.validateFile(new File(input))).isEmpty();
+    @MethodSource("v1_resources")
+    void v1_resources_validate(File input) throws Exception {
+        assertThat(validatorV1.validateFile(input)).isEmpty();
+    }
+
+    private static Stream<File> v1_resources() {
+        return FileUtils.listFiles(new File("src/test/resources/md/ddm/v1/"), null, false).stream();
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-        "src/test/resources/md/ddm/v2/example1.xml",
-        "src/test/resources/md/ddm/v2/example2.xml",
-        "src/test/resources/md/ddm/v2/simple.xml"})
-    void v2_resources_validate(String input) throws Exception {
+    @MethodSource("v2_resources")
+    void v2_resources_validate(File input) throws Exception {
         // example1/2: added personal data, dropped additional-xml
+        assertThat(validatorV2.validateFile(input)).isEmpty();
+    }
 
-        assertThat(validatorV2.validateFile(new File(input))).isEmpty();
+    private static Stream<File> v2_resources() {
+        return FileUtils.listFiles(new File("src/test/resources/md/ddm/v2/"), null, false).stream();
     }
 }
