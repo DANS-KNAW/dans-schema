@@ -6,7 +6,7 @@ DANS XML schemas
 DESCRIPTION
 -----------
 The [DANS BagIt Profile v1]{:target=_blank} requires several XML metadata files. This project includes the XML schema files to validate those XML files. These
-schemas will be published on a public website. <!-- TODO: change text to point to website when it is up -->. Alternatively you can
+schemas will be published on a public website. <!-- TODO: change text to point to website when it is up --> Alternatively you can
 [clone and build this project](#building-from-source) which will package site up both as a jar-file and as an RPM.
 
 !!! warning "DANS Schema vs EASY Schema"

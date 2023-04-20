@@ -21,7 +21,7 @@ import java.util.List;
 public class SchemaValidator {
     private final Schema schema;
     public SchemaValidator(String path) throws URISyntaxException, MalformedURLException, SAXException {
-        URI schemaLocation = new URI("file://"+new File("src/main/resources/"+path).getAbsolutePath());
+        URI schemaLocation = new URI("file://"+new File(path).getAbsolutePath());
         schema = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema")
             .newSchema(new URL(schemaLocation.toASCIIString()));
     }

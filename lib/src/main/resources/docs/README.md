@@ -1,5 +1,4 @@
-Examples for these schemas can be found in the accompanying example-repository:
+Examples for these schemas can be found in `src/test/resources/`:
 
-https://github.com/DANS-KNAW/easy-schema-examples/tree/master/src/main/assembly/dist/examples
-
+https://github.com/DANS-KNAW/dans-schema/tree/master/lib/src/main/resources
 
