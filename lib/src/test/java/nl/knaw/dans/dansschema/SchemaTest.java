@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class SchemaTest {
 
-    @DisplayName("should not throw")
+    @DisplayName("loading should not throw")
     @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("provider")
     void readSchema(File schemaName) {
@@ -39,9 +39,6 @@ public class SchemaTest {
         var files = new File("src/main/resources/");
         var extensions = new String[] { "xsd" };
         return listFiles(files, extensions, true)
-            .stream()
-            .filter(file -> !file.toString().endsWith("v1/provenance.xsd")) // The namespace attribute, 'http://easy.dans.knaw.nl/schemas/md/ddm/', of an <import> element information item must be identical to the targetNamespace attribute, 'http://schemas.dans.knaw.nl/dataset/ddm-v2/', of the imported document.
-            .filter(file -> !file.toString().endsWith("extern/xml.xsd")) // stumbles over "<!DOCTYPE"
-            .map(Arguments::of);
+            .stream().map(Arguments::of);
     }
 }
