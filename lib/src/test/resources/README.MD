@@ -18,8 +18,7 @@ The table maps formats to files in a bag.
 [DANS bag]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/0.0.0.md#dans-bagit-profile-v0
 [namespace prefixes]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/0.0.0.md#xml-namespaces
 
-The examples in this `src/test/reources` directory are organised with the same
-directory structure as de XSD files in the `src/main/resources` directory.
+Directories in this `src/test/reources` directory match with XSD files in the `src/main/resources` directory.
 Examples for XSDs that are not in the table above may be standalone,
 or embedded within examples for XSDs from the table.
 The namespace URI of the root element in the examples should match the
@@ -27,14 +26,14 @@ The namespace URI of the root element in the examples should match the
 
 ```
 ├── bag/metadata
-│   ├── agreements
-│   └── files
+│   ├── agreements/agreements
+│   └── files/files
 ├── dcx
 │   ├── dcx-dai
 │   └── dcx-gml
 └── ddm
-    ├── v1
-    └── v2
+    ├── v1/ddm
+    └── v2/ddm
 ```
 
 Validation

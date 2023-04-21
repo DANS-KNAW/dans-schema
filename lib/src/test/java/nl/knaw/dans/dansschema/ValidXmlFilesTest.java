@@ -19,39 +19,48 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.xml.sax.SAXException;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.util.stream.Stream;
 
-import static java.util.function.Function.identity;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ValidXmlFilesTest {
 
     @DisplayName("Should validate")
     @ParameterizedTest(name = "{index}: {1} --- {0}")
     @MethodSource("provider")
-    void validate(File file, String ignoredSchemaName, SchemaValidator validator) throws Exception {
-        // ignoredSchemaName is used for the name of the test
-        assertThat(validator.validateFile(file)).isEmpty();
+    void validate(File file, String schemaNameOrErrorMessage, SchemaValidator validator) throws Exception {
+        if (validator == null)
+            fail(schemaNameOrErrorMessage);
+        else
+            assertThat(validator.validateFile(file)).isEmpty();
     }
 
     private static Stream<Arguments> provider() throws Exception {
-        return Stream.of(
-            argumentsForOneSchema("bag/metadata/agreements/agreements.xsd", "bag/metadata/agreements/"),
-            argumentsForOneSchema("bag/metadata/files/files.xsd", "bag/metadata/files/"),
-            argumentsForOneSchema("dcx/dcx-dai.xsd", "dcx/dcx-dai/"),
-            argumentsForOneSchema("md/ddm/v1/ddm.xsd", "md/ddm/v1/"),
-            argumentsForOneSchema("md/ddm/v2/ddm.xsd", "md/ddm/v2/")
-        ).flatMap(identity());
+        return listFiles(new File("src/main/resources/"), new String[] { "xsd" }, true)
+            .stream().flatMap(ValidXmlFilesTest::toArguments);
     }
 
-    private static Stream<Arguments> argumentsForOneSchema(String xsdFile, String xmlFiles) throws Exception {
-        var validator = new SchemaValidator("src/main/resources/" + xsdFile);
-        var files = new File("src/test/resources/" + xmlFiles);
-        var extensions = new String[]{ "xml" };
-        return listFiles(files, extensions, false)
-            .stream().map(file -> Arguments.of(file, xsdFile, validator));
+    private static Stream<Arguments> toArguments(File xsdFile) {
+        var testDirName = xsdFile.toString()
+            .replace("/main/", "/test/")
+            .replace(".xsd", "");
+        var testDir = new File(testDirName);
+        if (!testDir.exists())
+            return Stream.of();
+        try {
+            var validator = new SchemaValidator(xsdFile.toString());
+            return listFiles(testDir, new String[] { "xml" }, true)
+                .stream().map(file -> Arguments.of(file, xsdFile.toString(), validator));
+        }
+        catch (URISyntaxException | MalformedURLException | SAXException e) {
+            return Stream.of(Arguments.of(null, String.format("%s --- %s", xsdFile, e), null));
+        }
     }
 }
