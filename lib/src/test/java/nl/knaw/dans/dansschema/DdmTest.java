@@ -15,24 +15,27 @@
  */
 package nl.knaw.dans.dansschema;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
-
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 
 import static nl.knaw.dans.dansschema.XmlReader.readXmlString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DdmTest {
-    private final String xsdDir = "src/main/resources/md/ddm/";
-    SchemaValidator ddmValidatorV2 = new SchemaValidator(xsdDir + "v2/ddm.xsd");
-    SchemaValidator ddmValidatorV1 = new SchemaValidator(xsdDir + "v1/ddm.xsd");
+    private static final String xsdDir = "src/main/resources/md/ddm/";
+    private static final String ddmNamespaceV1 = "http://easy.dans.knaw.nl/schemas/md/ddm/";
+    private static final String ddmNamespaceV2 = "http://schemas.dans.knaw.nl/dataset/ddm-v2/";
+    private static SchemaValidator ddmValidatorV2;
+    private static SchemaValidator ddmValidatorV1;
 
-    public DdmTest() throws MalformedURLException, URISyntaxException, SAXException {
+    @BeforeAll
+    public static void initValidators() throws Exception{
+        ddmValidatorV2 = new SchemaValidator(xsdDir + "v2/ddm.xsd");
+        ddmValidatorV1 = new SchemaValidator(xsdDir + "v1/ddm.xsd");
     }
+
 
     @Test
     public void xml_without_root_namespace_should_not_parse() {
@@ -80,7 +83,7 @@ public class DdmTest {
 
     @Test
     public void v2_should_require_personal_data() throws Exception {
-        String xml = simpleXml("http://schemas.dans.knaw.nl/dataset/ddm-v2/", 1, "");
+        String xml = simpleXml("http://schemas.dans.knaw.nl/dataset/ddm-v2/", 1, "","");
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -90,13 +93,13 @@ public class DdmTest {
 
     @Test
     public void v2_should_validate_with_personal_data() throws Exception {
-        String xml = simpleXml("http://schemas.dans.knaw.nl/dataset/ddm-v2/", 1, "<ddm:personalData present='No' />");
+        String xml = simpleXml(ddmNamespaceV2, 1, "<ddm:personalData present='No' />","");
         assertThat(ddmValidatorV2.validateString(xml)).isEmpty();
     }
 
     @Test
     public void v1_should_not_allow_personal_data() throws Exception {
-        String xml = simpleXml("http://easy.dans.knaw.nl/schemas/md/ddm/", 1, "<ddm:personalData present='No' />");
+        String xml = simpleXml(ddmNamespaceV1, 1, "<ddm:personalData present='No' />","");
         var result = ddmValidatorV1.validateString(xml);
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -105,24 +108,52 @@ public class DdmTest {
 
     @Test
     public void v1_should_validate_without_personal_data() throws Exception {
-        String xml = simpleXml("http://easy.dans.knaw.nl/schemas/md/ddm/", 1, "");
+        String xml = simpleXml(ddmNamespaceV1, 1, "","");
         assertThat(ddmValidatorV1.validateString(xml)).isEmpty();
     }
 
     @Test
     public void v1_should_validate_with_multiple_titles() throws Exception {
-        String xml = simpleXml("http://easy.dans.knaw.nl/schemas/md/ddm/", 2, "");
+        String xml = simpleXml(ddmNamespaceV1, 2, "","");
         assertThat(ddmValidatorV1.validateString(xml)).isEmpty();
     }
 
     @Test
     public void v2_should_not_validate_with_multiple_titles() throws Exception {
-        String xml = simpleXml("http://easy.dans.knaw.nl/schemas/md/ddm/", 2, "");
+        String xml = simpleXml(ddmNamespaceV2, 2, "","");
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(1);
+        assertThat(result.get(0))
+            .hasMessageMatching(".*Invalid content was found starting with element.*title}'. One of .*:description}' is expected.");
     }
 
-    private String simpleXml(String rootNameSpace, int nrOfTitles, String lastProfileElement) {
+    @Test
+    public void v1_should_report_invalid_usage_of_iso639_3() throws Exception {
+        String xml = simpleXml(ddmNamespaceV1, 1, "", all3languageEncodingSchemes);
+        var result = ddmValidatorV1.validateString(xml);
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0))
+            .hasMessage("cvc-enumeration-valid: Value 'ISO639-3' is not facet-valid with respect to enumeration '[ISO639-1, ISO639-2]'. It must be a value from the enumeration.");
+        assertThat(result.get(1))
+            .hasMessage("cvc-attribute.3: The value 'ISO639-3' of attribute 'encodingScheme' on element 'ddm:language' is not valid with respect to its type, 'LanguageEncodingScheme'.");
+    }
+
+    @Test
+    public void v2_should_report_invalid_usage_of_iso639_1() throws Exception {
+        String xml = simpleXml(ddmNamespaceV2, 1, "<ddm:personalData present='No' />", all3languageEncodingSchemes);
+        var result = ddmValidatorV2.validateString(xml);
+        assertThat(result).hasSize(2);
+        assertThat(result.get(0))
+            .hasMessageEndingWith("Value 'ISO639-1' is not facet-valid with respect to enumeration '[ISO639-2, ISO639-3]'. It must be a value from the enumeration.");
+        assertThat(result.get(1))
+            .hasMessage("cvc-attribute.3: The value 'ISO639-1' of attribute 'encodingScheme' on element 'ddm:language' is not valid with respect to its type, 'LanguageEncodingScheme'.");
+    }
+   private static final String all3languageEncodingSchemes = ""
+        + "        <ddm:language encodingScheme='ISO639-1' code='fy'>West-Fries</ddm:language>"
+        + "        <ddm:language encodingScheme='ISO639-2' code='ka'>Groenlands</ddm:language>"
+        + "        <ddm:language encodingScheme='ISO639-3' code='ba'>Baskisch</ddm:language>";
+
+    private static String simpleXml(String rootNameSpace, int nrOfTitles, String lastProfileElement, String dcmiElements) {
         var titles = "<dc:title>A title</dc:title>" + (nrOfTitles <= 1 ? "" : "<dc:title>Another title</dc:title>");
         var simpleXml = "<ddm:DDM"
             + "        xmlns:dc='http://purl.org/dc/elements/1.1/'"
@@ -140,10 +171,11 @@ public class DdmTest {
             + "        %s"
             + "    </ddm:profile>"
             + "    <ddm:dcmiMetadata>"
+            + "        %s"
             + "        <dcterms:license xsi:type='dcterms:URI'>http://opensource.org/licenses/I-just-made-this-up</dcterms:license>"
             + "        <dcterms:rightsHolder>I Lastname</dcterms:rightsHolder>"
             + "    </ddm:dcmiMetadata>"
             + "</ddm:DDM>";
-        return String.format(simpleXml, rootNameSpace, titles, lastProfileElement);
+        return String.format(simpleXml, rootNameSpace, titles, lastProfileElement, dcmiElements);
     }
 }
