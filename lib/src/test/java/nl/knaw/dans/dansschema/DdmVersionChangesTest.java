@@ -23,7 +23,7 @@ import static nl.knaw.dans.dansschema.XmlReader.readXmlString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DdmTest {
+public class DdmVersionChangesTest {
     private static final String xsdDir = "src/main/resources/md/ddm/";
     private static final String ddmNamespaceV1 = "http://easy.dans.knaw.nl/schemas/md/ddm/";
     private static final String ddmNamespaceV2 = "http://schemas.dans.knaw.nl/dataset/ddm-v2/";
