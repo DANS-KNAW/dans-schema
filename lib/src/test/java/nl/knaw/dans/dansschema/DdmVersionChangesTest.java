@@ -149,7 +149,7 @@ public class DdmVersionChangesTest {
             .hasMessage("cvc-attribute.3: The value 'ISO639-1' of attribute 'encodingScheme' on element 'ddm:language' is not valid with respect to its type, 'LanguageEncodingScheme'.");
     }
    private static final String all3languageEncodingSchemes = ""
-        + "        <ddm:language encodingScheme='ISO639-1' code='fy'>West-Fries</ddm:language>"
+        + "        <ddm:language encodingScheme='ISO639-1' code='fry'>West-Fries</ddm:language>"
         + "        <ddm:language encodingScheme='ISO639-2' code='ka'>Groenlands</ddm:language>"
         + "        <ddm:language encodingScheme='ISO639-3' code='ba'>Baskisch</ddm:language>";
 
