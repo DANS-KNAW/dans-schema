@@ -61,7 +61,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v1_should_allow_additional_xml_in_root() throws Exception {
+    public void v1_should_suggest_additional_xml_for_root() throws Exception {
         var result = ddmValidatorV1.validateString("<ddm:DDM xmlns:ddm='http://easy.dans.knaw.nl/schemas/md/ddm/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -72,7 +72,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v2_should_not_allow_additional_xml_in_root() throws Exception {
+    public void v1_should_not_suggest_additional_xml_for_root() throws Exception {
         var result = ddmValidatorV2.validateString("<ddm:DDM xmlns:ddm='http://schemas.dans.knaw.nl/dataset/ddm-v2/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
