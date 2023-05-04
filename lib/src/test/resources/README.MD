@@ -9,13 +9,12 @@ Note that actual practice also uses `dct` for `dcterms`.
 
 The table maps formats to files in a bag.
 
-| XSD          | file in DANS V0 bag                      |
+| XSD          | file in DANS V1 bag                      |
 |--------------|------------------------------------------|
 | `ddm`        | `metadata/dataset.xml`                   |
 | `files`      | `metadata/files.xml`                     |
-| `agreements` | `metadata/depositor-info/agreements.xml` |
 
-[DANS bag]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/0.0.0.md#dans-bagit-profile-v0
+[DANS bag]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/1.0.0.md#dans-bagit-profile-v0
 [namespace prefixes]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/0.0.0.md#xml-namespaces
 
 Directories in this `src/test/reources` directory match with XSD files in the `src/main/resources` directory.
