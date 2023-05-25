@@ -24,8 +24,10 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
+import static java.lang.Thread.sleep;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -40,6 +42,7 @@ public class ValidateXmlsTest {
             fail(schemaNameOrErrorMessage);
         else
             assertThat(validator.validateFile(file)).isEmpty();
+        TimeUnit.SECONDS.sleep(1); // reduce false negatives: Cannot resolve the name 'xml:lang'
     }
 
     private static Stream<Arguments> provider() {
