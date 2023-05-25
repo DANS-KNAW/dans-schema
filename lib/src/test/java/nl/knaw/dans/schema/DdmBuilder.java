@@ -20,7 +20,7 @@ public class DdmBuilder {
         return this;
     }
 
-    public DdmBuilder withAll3languageEncodingSchemes() {
+    public DdmBuilder withAll3LanguageEncodingSchemes() {
         this.additionalDcmiElements += ""
             + "        <ddm:language encodingScheme='ISO639-1' code='fry'>West-Fries</ddm:language>"
             + "        <ddm:language encodingScheme='ISO639-2' code='ka'>Groenlands</ddm:language>"

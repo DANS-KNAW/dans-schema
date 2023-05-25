@@ -38,14 +38,14 @@ public class DdmVersionChangesTest {
 
 
     @Test
-    public void xml_without_root_namespace_should_not_parse() {
+    public void xml_without_ddm_namespace_should_not_parse() {
         assertThatThrownBy(() -> (readXmlString("<ddm:DDM/>")).normalize())
             .isInstanceOf(SAXParseException.class)
             .hasMessage("The prefix \"ddm\" for element \"ddm:DDM\" is not bound.");
     }
 
     @Test
-    public void v1_should_require_easy_dans_knaw_nl_namespace() throws Exception {
+    public void v1_should_require_namespace_schema_easy_dans_knaw_nl() throws Exception {
         var result = ddmValidatorV1.validateString("<ddm:DDM  xmlns:ddm='http://schemas.dans.knaw.nl/dataset/ddm-v2/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -53,7 +53,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v2_should_require_schemas_dans_knaw_nl_name_space() throws Exception {
+    public void v2_should_require_namespace_schema_dans_knaw_nl() throws Exception {
         var result = ddmValidatorV2.validateString("<ddm:DDM xmlns:ddm='http://easy.dans.knaw.nl/schemas/md/ddm/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -61,7 +61,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v1_should_suggest_additional_xml_for_root() throws Exception {
+    public void v1_should_suggest_additional_xml_for_empty_ddm() throws Exception {
         var result = ddmValidatorV1.validateString("<ddm:DDM xmlns:ddm='http://easy.dans.knaw.nl/schemas/md/ddm/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -70,7 +70,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v2_should_not_suggest_additional_xml_for_root() throws Exception {
+    public void v2_should_not_suggest_additional_xml_for_empty_dmm() throws Exception {
         var result = ddmValidatorV2.validateString("<ddm:DDM xmlns:ddm='http://schemas.dans.knaw.nl/dataset/ddm-v2/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -119,7 +119,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v2_should_not_validate_with_multiple_titles() throws Exception {
+    public void v2_should_not_allow_multiple_titles() throws Exception {
         String xml = new DdmBuilder(ddmNamespaceV2).withMultipleTiles().build();
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(1);
@@ -128,9 +128,9 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v1_should_report_invalid_usage_of_iso639_3() throws Exception {
+    public void v1_should_not_allow_languageEncodingScheme_version_3() throws Exception {
         String xml = new DdmBuilder(ddmNamespaceV1)
-            .withAll3languageEncodingSchemes()
+            .withAll3LanguageEncodingSchemes()
             .build();
         var result = ddmValidatorV1.validateString(xml);
         assertThat(result).hasSize(2);
@@ -141,10 +141,10 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v2_should_report_invalid_usage_of_iso639_1() throws Exception {
+    public void v2_should_not_allow_languageEncodingScheme_version_1() throws Exception {
         String xml = new DdmBuilder(ddmNamespaceV2)
             .withAdditionalProfileElement("<ddm:personalData present='No' />")
-            .withAll3languageEncodingSchemes()
+            .withAll3LanguageEncodingSchemes()
             .build();
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(2);
