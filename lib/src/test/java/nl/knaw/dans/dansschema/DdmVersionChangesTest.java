@@ -66,8 +66,6 @@ public class DdmVersionChangesTest {
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
             .hasMessageContaining("The content of element 'ddm:DDM' is not complete. One of")
-            .hasMessageContaining(":profile, ")
-            .hasMessageContaining(":dcmiMetadata, ")
             .hasMessageContaining(":additional-xml}' is expected.");
     }
 
@@ -77,8 +75,7 @@ public class DdmVersionChangesTest {
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
             .hasMessageContaining("The content of element 'ddm:DDM' is not complete. One of")
-            .hasMessageContaining(":profile, ")
-            .hasMessageContaining(":dcmiMetadata}' is expected.");
+            .hasMessageNotContaining("additional-xml");
     }
 
     @Test
