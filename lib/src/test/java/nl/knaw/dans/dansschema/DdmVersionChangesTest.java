@@ -72,7 +72,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v1_should_not_suggest_additional_xml_for_root() throws Exception {
+    public void v2_should_not_suggest_additional_xml_for_root() throws Exception {
         var result = ddmValidatorV2.validateString("<ddm:DDM xmlns:ddm='http://schemas.dans.knaw.nl/dataset/ddm-v2/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
