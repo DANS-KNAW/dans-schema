@@ -2,9 +2,9 @@ package nl.knaw.dans.schema;
 
 public class DdmBuilder {
     private final String ddmNameSpace;
-    private String lastProfileElement = "";
+    private String lastProfileElements = "";
     private String additionalTitle = "";
-    private String additionalDcmiElements = "";
+    private String firstDcmiElements = "";
 
     public DdmBuilder(String ddmNameSpace) {
         this.ddmNameSpace = ddmNameSpace;
@@ -16,12 +16,12 @@ public class DdmBuilder {
     }
 
     public DdmBuilder withAdditionalProfileElement(String value) {
-        this.lastProfileElement += value;
+        this.lastProfileElements += value;
         return this;
     }
 
     public DdmBuilder withAll3LanguageEncodingSchemes() {
-        this.additionalDcmiElements += ""
+        this.firstDcmiElements += ""
             + "        <ddm:language encodingScheme='ISO639-1' code='fry'>West-Fries</ddm:language>"
             + "        <ddm:language encodingScheme='ISO639-2' code='ka'>Groenlands</ddm:language>"
             + "        <ddm:language encodingScheme='ISO639-3' code='ba'>Baskisch</ddm:language>";
@@ -51,7 +51,7 @@ public class DdmBuilder {
             + "        <dcterms:rightsHolder>I Lastname</dcterms:rightsHolder>"
             + "    </ddm:dcmiMetadata>"
             + "</ddm:DDM>";
-        return String.format(simpleXml, ddmNameSpace, additionalTitle, lastProfileElement, additionalDcmiElements);
+        return String.format(simpleXml, ddmNameSpace, titles, lastProfileElements, firstDcmiElements);
     }
 
 }
