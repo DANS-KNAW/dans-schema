@@ -30,7 +30,7 @@ import static org.apache.commons.io.FileUtils.listFiles;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ValidXmlsTest {
+public class ValidateXmlsTest {
 
     @DisplayName("Should validate")
     @ParameterizedTest(name = "{index}: {1} --- {0}")
@@ -44,7 +44,7 @@ public class ValidXmlsTest {
 
     private static Stream<Arguments> provider() {
         return listFiles(new File("src/main/resources/"), new String[] { "xsd" }, true)
-            .stream().flatMap(ValidXmlsTest::toXmlFiles);
+            .stream().flatMap(ValidateXmlsTest::toXmlFiles);
     }
 
     private static Stream<Arguments> toXmlFiles(File xsdFile) {

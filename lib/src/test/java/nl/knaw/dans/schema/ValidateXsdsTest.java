@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class ValidXsdsTest {
+public class ValidateXsdsTest {
 
     @DisplayName("loading should not throw")
     @ParameterizedTest(name = "{index}: {0}")
