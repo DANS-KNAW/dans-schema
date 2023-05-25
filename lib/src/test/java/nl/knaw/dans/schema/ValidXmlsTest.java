@@ -42,21 +42,21 @@ public class ValidXmlsTest {
             assertThat(validator.validateFile(file)).isEmpty();
     }
 
-    private static Stream<Arguments> provider() throws Exception {
+    private static Stream<Arguments> provider() {
         return listFiles(new File("src/main/resources/"), new String[] { "xsd" }, true)
-            .stream().flatMap(ValidXmlsTest::toArguments);
+            .stream().flatMap(ValidXmlsTest::toXmlFiles);
     }
 
-    private static Stream<Arguments> toArguments(File xsdFile) {
-        var testDirName = xsdFile.toString()
+    private static Stream<Arguments> toXmlFiles(File xsdFile) {
+        var dirName = xsdFile.toString()
             .replace("/main/", "/test/")
             .replace(".xsd", "");
-        var testDir = new File(testDirName);
-        if (!testDir.exists())
+        var dirWithXmls = new File(dirName);
+        if (!dirWithXmls.exists())
             return Stream.of();
         try {
             var validator = new SchemaValidator(xsdFile.toString());
-            return listFiles(testDir, new String[] { "xml" }, true)
+            return listFiles(dirWithXmls, new String[] { "xml" }, true)
                 .stream().map(file -> Arguments.of(file, xsdFile.toString(), validator));
         }
         catch (URISyntaxException | MalformedURLException | SAXException e) {

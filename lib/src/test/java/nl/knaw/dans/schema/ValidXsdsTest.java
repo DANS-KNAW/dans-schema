@@ -26,7 +26,7 @@ import java.util.stream.Stream;
 import static org.apache.commons.io.FileUtils.listFiles;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-public class SchemaTest {
+public class ValidXsdsTest {
 
     @DisplayName("loading should not throw")
     @ParameterizedTest(name = "{index}: {0}")
@@ -35,7 +35,7 @@ public class SchemaTest {
         assertDoesNotThrow(() -> new SchemaValidator(schemaName.toString()));
     }
 
-    private static Stream<Arguments> provider() throws Exception {
+    private static Stream<Arguments> provider() {
         var files = new File("src/main/resources/");
         var extensions = new String[] { "xsd" };
         return listFiles(files, extensions, true)
