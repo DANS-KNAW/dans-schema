@@ -15,6 +15,30 @@
  */
 package nl.knaw.dans.schema;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.io.File;
+import java.util.stream.Stream;
+
+import static org.apache.commons.io.FileUtils.listFiles;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 public class SchemaTest {
-    // Stub
+
+    @DisplayName("loading should not throw")
+    @ParameterizedTest(name = "{index}: {0}")
+    @MethodSource("provider")
+    void readSchema(File schemaName) {
+        assertDoesNotThrow(() -> new SchemaValidator(schemaName.toString()));
+    }
+
+    private static Stream<Arguments> provider() throws Exception {
+        var files = new File("src/main/resources/");
+        var extensions = new String[] { "xsd" };
+        return listFiles(files, extensions, true)
+            .stream().map(Arguments::of);
+    }
 }

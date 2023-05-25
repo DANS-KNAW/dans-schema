@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nl.knaw.dans.dansschema;
+package nl.knaw.dans.schema;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXParseException;
 
-import static nl.knaw.dans.dansschema.XmlReader.readXmlString;
+import static nl.knaw.dans.schema.XmlReader.readXmlString;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

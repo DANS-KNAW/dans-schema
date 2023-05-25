@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package nl.knaw.dans.dansschema;
+package nl.knaw.dans.schema;
 
 import org.w3c.dom.Node;
 import org.xml.sax.ErrorHandler;
