@@ -53,7 +53,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v2_should_require_easy_dans_knaw_nl_name_space() throws Exception {
+    public void v2_should_require_schemas_dans_knaw_nl_name_space() throws Exception {
         var result = ddmValidatorV2.validateString("<ddm:DDM xmlns:ddm='http://easy.dans.knaw.nl/schemas/md/ddm/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
