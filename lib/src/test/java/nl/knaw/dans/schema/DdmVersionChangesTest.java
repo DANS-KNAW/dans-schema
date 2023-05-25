@@ -80,7 +80,8 @@ public class DdmVersionChangesTest {
 
     @Test
     public void v2_should_require_personal_data() throws Exception {
-        String xml = simpleXml("http://schemas.dans.knaw.nl/dataset/ddm-v2/", 1, "","");
+        String xml = new DdmBuilder("http://schemas.dans.knaw.nl/dataset/ddm-v2/")
+            .build();
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -90,13 +91,15 @@ public class DdmVersionChangesTest {
 
     @Test
     public void v2_should_validate_with_personal_data() throws Exception {
-        String xml = simpleXml(ddmNamespaceV2, 1, "<ddm:personalData present='No' />","");
+        String xml = new DdmBuilder(ddmNamespaceV2).withAdditionalProfileElement("<ddm:personalData present='No' />").build();
         assertThat(ddmValidatorV2.validateString(xml)).isEmpty();
     }
 
     @Test
     public void v1_should_not_allow_personal_data() throws Exception {
-        String xml = simpleXml(ddmNamespaceV1, 1, "<ddm:personalData present='No' />","");
+        String xml = new DdmBuilder(ddmNamespaceV1)
+            .withAdditionalProfileElement("<ddm:personalData present='No' />")
+            .build();
         var result = ddmValidatorV1.validateString(xml);
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -105,19 +108,19 @@ public class DdmVersionChangesTest {
 
     @Test
     public void v1_should_validate_without_personal_data() throws Exception {
-        String xml = simpleXml(ddmNamespaceV1, 1, "","");
+        String xml = new DdmBuilder(ddmNamespaceV1).build();
         assertThat(ddmValidatorV1.validateString(xml)).isEmpty();
     }
 
     @Test
     public void v1_should_validate_with_multiple_titles() throws Exception {
-        String xml = simpleXml(ddmNamespaceV1, 2, "","");
+        String xml = new DdmBuilder(ddmNamespaceV1).withMultipleTiles().build();
         assertThat(ddmValidatorV1.validateString(xml)).isEmpty();
     }
 
     @Test
     public void v2_should_not_validate_with_multiple_titles() throws Exception {
-        String xml = simpleXml(ddmNamespaceV2, 2, "","");
+        String xml = new DdmBuilder(ddmNamespaceV2).withMultipleTiles().build();
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
@@ -126,7 +129,9 @@ public class DdmVersionChangesTest {
 
     @Test
     public void v1_should_report_invalid_usage_of_iso639_3() throws Exception {
-        String xml = simpleXml(ddmNamespaceV1, 1, "", all3languageEncodingSchemes);
+        String xml = new DdmBuilder(ddmNamespaceV1)
+            .withAll3languageEncodingSchemes()
+            .build();
         var result = ddmValidatorV1.validateString(xml);
         assertThat(result).hasSize(2);
         assertThat(result.get(0))
@@ -137,42 +142,15 @@ public class DdmVersionChangesTest {
 
     @Test
     public void v2_should_report_invalid_usage_of_iso639_1() throws Exception {
-        String xml = simpleXml(ddmNamespaceV2, 1, "<ddm:personalData present='No' />", all3languageEncodingSchemes);
+        String xml = new DdmBuilder(ddmNamespaceV2)
+            .withAdditionalProfileElement("<ddm:personalData present='No' />")
+            .withAll3languageEncodingSchemes()
+            .build();
         var result = ddmValidatorV2.validateString(xml);
         assertThat(result).hasSize(2);
         assertThat(result.get(0))
             .hasMessageEndingWith("Value 'ISO639-1' is not facet-valid with respect to enumeration '[ISO639-2, ISO639-3]'. It must be a value from the enumeration.");
         assertThat(result.get(1))
             .hasMessage("cvc-attribute.3: The value 'ISO639-1' of attribute 'encodingScheme' on element 'ddm:language' is not valid with respect to its type, 'LanguageEncodingScheme'.");
-    }
-   private static final String all3languageEncodingSchemes = ""
-        + "        <ddm:language encodingScheme='ISO639-1' code='fry'>West-Fries</ddm:language>"
-        + "        <ddm:language encodingScheme='ISO639-2' code='ka'>Groenlands</ddm:language>"
-        + "        <ddm:language encodingScheme='ISO639-3' code='ba'>Baskisch</ddm:language>";
-
-    private static String simpleXml(String rootNameSpace, int nrOfTitles, String lastProfileElement, String dcmiElements) {
-        var titles = "<dc:title>A title</dc:title>" + (nrOfTitles <= 1 ? "" : "<dc:title>Another title</dc:title>");
-        var simpleXml = "<ddm:DDM"
-            + "        xmlns:dc='http://purl.org/dc/elements/1.1/'"
-            + "        xmlns:ddm='%s'"
-            + "        xmlns:dcterms='http://purl.org/dc/terms/'"
-            + "        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
-            + "    <ddm:profile>"
-            + "        %s"
-            + "        <dcterms:description>This is a simple example.</dcterms:description>"
-            + "        <dc:creator>Bergman, W.A.</dc:creator>"
-            + "        <ddm:created>2015-09-09</ddm:created>"
-            + "        <ddm:available>2015-09-08</ddm:available>"
-            + "        <ddm:audience>D16300</ddm:audience>"
-            + "        <ddm:accessRights>NO_ACCESS</ddm:accessRights>"
-            + "        %s"
-            + "    </ddm:profile>"
-            + "    <ddm:dcmiMetadata>"
-            + "        %s"
-            + "        <dcterms:license xsi:type='dcterms:URI'>http://opensource.org/licenses/I-just-made-this-up</dcterms:license>"
-            + "        <dcterms:rightsHolder>I Lastname</dcterms:rightsHolder>"
-            + "    </ddm:dcmiMetadata>"
-            + "</ddm:DDM>";
-        return String.format(simpleXml, rootNameSpace, titles, lastProfileElement, dcmiElements);
     }
 }
