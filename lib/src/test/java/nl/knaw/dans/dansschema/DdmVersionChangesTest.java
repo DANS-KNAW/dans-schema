@@ -45,7 +45,7 @@ public class DdmVersionChangesTest {
     }
 
     @Test
-    public void v1_should_require_schemas_dans_knaw_nl_namespace() throws Exception {
+    public void v1_should_require_easy_dans_knaw_nl_namespace() throws Exception {
         var result = ddmValidatorV1.validateString("<ddm:DDM  xmlns:ddm='http://schemas.dans.knaw.nl/dataset/ddm-v2/'/>");
         assertThat(result).hasSize(1);
         assertThat(result.get(0))
