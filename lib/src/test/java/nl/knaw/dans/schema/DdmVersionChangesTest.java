@@ -31,7 +31,9 @@ public class DdmVersionChangesTest {
     private static SchemaValidator ddmValidatorV1;
 
     @BeforeAll
-    public static void initValidators() throws Exception{
+    public static void initValidators() throws Exception {
+        // erratically appearing error: Cannot resolve the name 'xml:lang'
+        // results in a failure of the test class and an ignored of all test methods
         ddmValidatorV2 = new SchemaValidator(xsdDir + "v2/ddm.xsd");
         ddmValidatorV1 = new SchemaValidator(xsdDir + "v1/ddm.xsd");
     }

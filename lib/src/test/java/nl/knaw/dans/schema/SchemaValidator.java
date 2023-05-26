@@ -20,6 +20,7 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Schema;
@@ -37,7 +38,7 @@ public class SchemaValidator {
     private final Schema schema;
     public SchemaValidator(String path) throws URISyntaxException, MalformedURLException, SAXException {
         URI schemaLocation = new URI("file://"+new File(path).getAbsolutePath());
-        schema = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema")
+        schema = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
             .newSchema(new URL(schemaLocation.toASCIIString()));
     }
     public List<SAXParseException> validateString(String xml) throws IOException, SAXException, ParserConfigurationException {
@@ -47,13 +48,12 @@ public class SchemaValidator {
         return validateDocument(XmlReader.readXmlFile(xml));
     }
     private List<SAXParseException> validateDocument(Node node) throws IOException, SAXException {
-
+        // copied from dd-validate-dans-bag.XmlSchemaValidatorImpl
         var validator = schema.newValidator();
         var exceptions = new ArrayList<SAXParseException>();
 
         validator.setErrorHandler(new ErrorHandler() {
 
-            // TODO verify that a warning should also result in an error
             @Override
             public void warning(SAXParseException e) {
                 exceptions.add(e);

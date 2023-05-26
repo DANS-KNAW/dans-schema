@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 public class XmlReader {
+    // copy of XmlReaderImpl (without xpath-NamespaceContext) in dd/ingest-flow and dd-validate-dans-bag
 
     static public Document readXmlFile(File file) throws ParserConfigurationException, IOException, SAXException {
         var factory = getFactory();

@@ -44,14 +44,13 @@ public class DdmBuilder {
     }
 
     public String build() {
-        var titles = "<dc:title>A title</dc:title>" + additionalTitle;
-        var simpleXml = "<ddm:DDM"
+        var minimalValidXml = "<ddm:DDM"
             + "        xmlns:dc='http://purl.org/dc/elements/1.1/'"
             + "        xmlns:ddm='%s'"
             + "        xmlns:dcterms='http://purl.org/dc/terms/'"
             + "        xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>"
             + "    <ddm:profile>"
-            + "        %s"
+            + "        <dc:title>A title</dc:title>%s"
             + "        <dcterms:description>This is a simple example.</dcterms:description>"
             + "        <dc:creator>Bergman, W.A.</dc:creator>"
             + "        <ddm:created>2015-09-09</ddm:created>"
@@ -66,7 +65,7 @@ public class DdmBuilder {
             + "        <dcterms:rightsHolder>I Lastname</dcterms:rightsHolder>"
             + "    </ddm:dcmiMetadata>"
             + "</ddm:DDM>";
-        return String.format(simpleXml, ddmNameSpace, titles, lastProfileElements, firstDcmiElements);
+        return String.format(minimalValidXml, ddmNameSpace, additionalTitle, lastProfileElements, firstDcmiElements);
     }
 
 }
