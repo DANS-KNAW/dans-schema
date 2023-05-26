@@ -54,7 +54,6 @@ The table maps formats to files in a bag.
 [DANS bag]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/1.0.0.md#dans-bagit-profile-v0
 [namespace prefixes]: https://github.com/DANS-KNAW/dans-bagit-profile/blob/master/docs/versions/0.0.0.md#xml-namespaces
 
-Directories in this `lib/src/test/resources` directory match with XSD files in the `lib/src/main/resources` directory.
 Examples for XSDs that are not in the table above may be standalone,
 or embedded within examples for XSDs from the table.
 The namespace URI of the root element in the examples should match the
@@ -67,7 +66,7 @@ The namespace URI of the root element in the examples should match the
 ├── dcx
 │   ├── dcx-dai
 │   └── dcx-gml
-└── ddm
+└── md/ddm
     ├── v1/ddm
     └── v2/ddm
 ```
@@ -77,8 +76,11 @@ Validation
 
 ### Unit tests
 
+
+
 * `ValidateXsdFilesTest` shows that the provided XSDs are valid.
-* `ValidateXmlFilesTest` shows that the provided examples are valid.
+* `ValidateXmlFilesTest` shows that the provided examples are valid.  
+  Directories in `lib/src/test/resources` should match with XSD files in the `lib/src/main/resources` directory.
 * `DdmVersionChangesTest` documents the effect of the differences between V1 and V2 of the DDM schemas.
 
 ### DIY
