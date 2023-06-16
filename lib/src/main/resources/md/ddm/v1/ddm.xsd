@@ -189,17 +189,12 @@
 
     <xs:simpleType name="LanguageEncodingScheme">
         <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ISO639-1">
+            </xs:enumeration>
             <xs:enumeration value="ISO639-2">
                 <xs:annotation>
                     <xs:documentation>
                         http://lcweb.loc.gov/standards/iso639-2/langhome.html
-                    </xs:documentation>
-                </xs:annotation>
-            </xs:enumeration>
-            <xs:enumeration value="ISO639-3">
-                <xs:annotation>
-                    <xs:documentation>
-                        http://www.sil.org/iso639-3/
                     </xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
