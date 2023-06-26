@@ -42,7 +42,7 @@
     <xs:import namespace="http://easy.dans.knaw.nl/schemas/dcx/dai/"
                schemaLocation="../../../../dcx/dcx-dai.xsd"/>
     <xs:import namespace="http://easy.dans.knaw.nl/schemas/md/ddm/"
-               schemaLocation="../../../../md/ddm/v2/ddm.xsd"/>
+               schemaLocation="../../../../md/ddm/v1/ddm.xsd"/>
     <xs:import namespace="http://easy.dans.knaw.nl/schemas/vocab/narcis-type/"
                schemaLocation="../../../../vocab/narcis-type.xsd"/>
     <xs:import namespace="http://easy.dans.knaw.nl/schemas/vocab/identifier-type/"
