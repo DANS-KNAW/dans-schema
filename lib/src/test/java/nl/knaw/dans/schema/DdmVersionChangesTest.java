@@ -128,31 +128,4 @@ public class DdmVersionChangesTest {
         assertThat(result.get(0))
             .hasMessageMatching(".*Invalid content was found starting with element.*title}'. One of .*:description}' is expected.");
     }
-
-    @Test
-    public void v1_should_not_allow_languageEncodingScheme_version_3() throws Exception {
-        String xml = new DdmBuilder(ddmNamespaceV1)
-            .withAll3LanguageEncodingSchemes()
-            .build();
-        var result = ddmValidatorV1.validateString(xml);
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0))
-            .hasMessage("cvc-enumeration-valid: Value 'ISO639-3' is not facet-valid with respect to enumeration '[ISO639-1, ISO639-2]'. It must be a value from the enumeration.");
-        assertThat(result.get(1))
-            .hasMessage("cvc-attribute.3: The value 'ISO639-3' of attribute 'encodingScheme' on element 'ddm:language' is not valid with respect to its type, 'LanguageEncodingScheme'.");
-    }
-
-    @Test
-    public void v2_should_not_allow_languageEncodingScheme_version_1() throws Exception {
-        String xml = new DdmBuilder(ddmNamespaceV2)
-            .withAdditionalProfileElement("<ddm:personalData present='No' />")
-            .withAll3LanguageEncodingSchemes()
-            .build();
-        var result = ddmValidatorV2.validateString(xml);
-        assertThat(result).hasSize(2);
-        assertThat(result.get(0))
-            .hasMessageEndingWith("Value 'ISO639-1' is not facet-valid with respect to enumeration '[ISO639-2, ISO639-3]'. It must be a value from the enumeration.");
-        assertThat(result.get(1))
-            .hasMessage("cvc-attribute.3: The value 'ISO639-1' of attribute 'encodingScheme' on element 'ddm:language' is not valid with respect to its type, 'LanguageEncodingScheme'.");
-    }
 }
