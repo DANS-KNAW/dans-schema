@@ -55,7 +55,8 @@
                 <xs:element name="groupIds" form="unqualified">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="group" type="xs:NCName" minOccurs="0"/>
+                            <xs:element name="group" form="unqualified" type="xs:NCName" minOccurs="0"/>
+                            <xs:element name="groupId" form="unqualified" type="xs:NCName" minOccurs="0"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
