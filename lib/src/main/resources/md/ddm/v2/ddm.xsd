@@ -439,9 +439,14 @@
                         <xs:documentation>The URI of the scheme. For a SKOS scheme, the ConceptScheme in the 'skos:inScheme' value is expected</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="valueURI" use="required" type="xs:anyURI">
+                <xs:attribute name="valueURI" type="xs:anyURI">
                     <xs:annotation>
                         <xs:documentation>The URI of the value given in the text-node.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="valueCode" type="xs:anyURI">
+                    <xs:annotation>
+                        <xs:documentation>The code of the value given in the text-node.</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
                 <xs:attribute name="subjectScheme" type="xs:string" fixed="ABR Rapporten" use="required">
@@ -551,7 +556,12 @@
                         <xs:documentation>The URI of the scheme. For a SKOS scheme, the ConceptScheme in the 'skos:inScheme' value is expected</xs:documentation>
                     </xs:annotation>
                 </xs:attribute>
-                <xs:attribute name="valueURI" use="required" type="xs:anyURI">
+                <xs:attribute name="valueCode" type="xs:anyURI">
+                    <xs:annotation>
+                        <xs:documentation>The code of the value given in the text-node.</xs:documentation>
+                    </xs:annotation>
+                </xs:attribute>
+                <xs:attribute name="valueURI" type="xs:anyURI">
                     <xs:annotation>
                         <xs:documentation>The URI of the value given in the text-node.</xs:documentation>
                     </xs:annotation>
