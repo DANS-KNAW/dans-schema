@@ -181,12 +181,42 @@
     </xs:element>
 
     <!-- =================================================================================== -->
-    <xs:element name="created" substitutionGroup="dcterms:created" type="dcterms:W3CDTF">
+    <xs:simpleType name="fourDigitYear">
+        <xs:restriction base="xs:gYear">
+            <xs:pattern value="[0-9]{4}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="fourDigitYearMonth">
+        <xs:restriction base="xs:gYearMonth">
+            <xs:pattern value="[0-9]{4}-(0?[1-9]|1[0-2])"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="fourDigitYearDate">
+        <xs:restriction base="xs:date">
+            <xs:pattern value="[0-9]{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[12][0-9]|3[01])"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="fourDigitYearW3CDTF">
+        <xs:simpleContent>
+            <xs:restriction base="dc:SimpleLiteral">
+                <xs:simpleType>
+                    <xs:union memberTypes="ddm:fourDigitYear ddm:fourDigitYearMonth ddm:fourDigitYearDate"/>
+                </xs:simpleType>
+                <xs:attribute ref="xml:lang" use="prohibited"/>
+            </xs:restriction>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- =================================================================================== -->
+    <xs:element name="created" substitutionGroup="dcterms:created" type="ddm:fourDigitYearW3CDTF">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Restriction on dcterms:created.
 
-                Element value MUST conform to the dcterms:W3CDTF format.
+                Element value MUST conform to the dcterms:W3CDTF format, with a year formatted with 4 digits.
 
                 See also: http://purl.org/dc/terms/created
             </xs:documentation>
@@ -194,12 +224,12 @@
     </xs:element>
 
     <!-- =================================================================================== -->
-    <xs:element name="available" substitutionGroup="dcterms:available" type="dcterms:W3CDTF">
+    <xs:element name="available" substitutionGroup="dcterms:available" type="ddm:fourDigitYearW3CDTF">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Restriction on dcterms:available.
 
-                Element value MUST conform to the dcterms:W3CDTF format.
+                Element value MUST conform to the dcterms:W3CDTF format, with a year formatted with 4 digits.
 
                 See also: http://purl.org/dc/terms/available
             </xs:documentation>
