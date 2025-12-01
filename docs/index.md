@@ -14,7 +14,7 @@ schemas will be published on a public website. <!-- TODO: change text to point t
     DANS Schema contains the schemas for the Data Stations. It is forked from the legacy project [easy-schema]{:target=_blank} which will be phased out with 
     EASY itself. 
 
-[DANS BagIt Profile v1]: https://dans-knaw.github.io/dans-bagit-profile/versions/1.0.0/
+[DANS BagIt Profile v1]: https://dans-knaw.github.io/dans-bagit-profile/versions/1.2.0/
 
 [easy-schema]: https://github.com/DANS-KNAW/easy-schema
 

@@ -21,11 +21,11 @@
     <parent>
         <groupId>nl.knaw.dans</groupId>
         <artifactId>dd-parent</artifactId>
-        <version>1.9.0</version>
+        <version>1.10.0</version>
         <relativePath />
     </parent>
     <artifactId>dans-schema</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>DANS XML Schemas RPM Build</name>
     <inceptionYear>2022</inceptionYear>
     <scm>
