@@ -224,7 +224,7 @@
     </xs:element>
 
     <!-- =================================================================================== -->
-    <xs:element name="available" substitutionGroup="dcterms:available" type="ddm:simpleW3CDTF">
+    <xs:element name="available" substitutionGroup="dcterms:available" type="ddm:fourDigitYearW3CDTF">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Restriction on dcterms:available.
