@@ -211,7 +211,7 @@
     </xs:complexType>
 
     <!-- =================================================================================== -->
-    <xs:element name="created" substitutionGroup="dcterms:created" type="ddm:simpleW3CDTF">
+    <xs:element name="created" substitutionGroup="dcterms:created" type="ddm:fourDigitYearW3CDTF">
         <xs:annotation>
             <xs:documentation xml:lang="en">
                 Restriction on dcterms:created.
