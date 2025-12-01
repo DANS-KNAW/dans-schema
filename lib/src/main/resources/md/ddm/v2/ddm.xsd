@@ -199,7 +199,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:complexType name="simpleW3CDTF">
+    <xs:complexType name="fourDigitYearW3CDTF">
         <xs:simpleContent>
             <xs:restriction base="dc:SimpleLiteral">
                 <xs:simpleType>
