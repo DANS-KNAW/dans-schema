@@ -21,16 +21,16 @@
     <parent>
         <groupId>nl.knaw.dans</groupId>
         <artifactId>dd-parent</artifactId>
-        <version>1.12.0</version>
-        <relativePath />
+        <version>3.0.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
     <artifactId>dans-schema</artifactId>
     <version>1.1.1-SNAPSHOT</version>
     <name>DANS XML Schemas RPM Build</name>
     <inceptionYear>2022</inceptionYear>
     <scm>
-        <tag>HEAD</tag>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
@@ -40,29 +40,6 @@
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>dans-releases</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <url>https://maven.dans.knaw.nl/releases/</url>
-        </repository>
-        <repository>
-            <id>dans-snapshots</id>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <url>https://maven.dans.knaw.nl/snapshots/</url>
-        </repository>
-    </repositories>
 
     <profiles>
         <profile>
@@ -76,12 +53,12 @@
             <build>
                 <resources>
                     <resource>
-                        <directory>src/main/resources</directory>
                         <targetPath>${project.build.directory}/version</targetPath>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
                         <includes>
                             <include>version</include>
                         </includes>
-                        <filtering>true</filtering>
                     </resource>
                 </resources>
 
@@ -92,10 +69,10 @@
                         <executions>
                             <execution>
                                 <id>build-resources</id>
-                                <phase>generate-resources</phase>
                                 <goals>
                                     <goal>unpack</goal>
                                 </goals>
+                                <phase>generate-resources</phase>
                                 <configuration>
                                     <artifactItems>
                                         <artifactItem>

@@ -16,49 +16,34 @@
     limitations under the License.
 
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>nl.knaw.dans</groupId>
         <artifactId>dd-parent</artifactId>
-        <version>1.12.0</version>
-        <relativePath />
+        <version>3.0.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <artifactId>dans-schema-build</artifactId>
     <version>1.1.1-SNAPSHOT</version>
 
+    <packaging>pom</packaging>
+
     <name>DANS XML Schema Definitions Build</name>
     <description>Collection of metadata schema's used by DANS Data Stations</description>
     <inceptionYear>2022</inceptionYear>
 
-    <packaging>pom</packaging>
+    <modules>
+        <module>rpm</module>
+        <module>lib</module>
+    </modules>
 
     <scm>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
         <tag>HEAD</tag>
     </scm>
-
-    <repositories>
-        <repository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <build>
         <plugins>
@@ -77,10 +62,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <modules>
-        <module>rpm</module>
-        <module>lib</module>
-    </modules>
 </project>
-

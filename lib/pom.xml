@@ -21,16 +21,16 @@
     <parent>
         <groupId>nl.knaw.dans</groupId>
         <artifactId>dd-parent</artifactId>
-        <version>1.12.0</version>
-        <relativePath />
+        <version>3.0.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
     <artifactId>dans-schema-lib</artifactId>
     <version>1.1.1-SNAPSHOT</version>
     <name>DANS XML Schemas Resource JAR</name>
     <inceptionYear>2022</inceptionYear>
     <scm>
-        <tag>HEAD</tag>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
@@ -55,25 +55,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>DANS</id>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <url>https://maven.dans.knaw.nl/releases</url>
-        </pluginRepository>
-    </pluginRepositories>
-
     <build>
         <plugins>
             <plugin>
@@ -89,4 +70,3 @@
         </plugins>
     </build>
 </project>
-
