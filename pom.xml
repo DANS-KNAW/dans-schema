@@ -43,6 +43,7 @@
     <scm>
         <developerConnection>scm:git:ssh://github.com/DANS-KNAW/dans-schema</developerConnection>
         <tag>HEAD</tag>
+        <url>https://github.com/DANS-KNAW/${project.artifactId}</url>
     </scm>
 
     <build>
