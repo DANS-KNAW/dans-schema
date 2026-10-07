@@ -6,3 +6,4 @@
 /release.properties
 /*/*.releaseBackup
 /*/release.properties
+/__pycache__*
