@@ -129,14 +129,14 @@
         <!-- In case of a dutch archaeological dataset, use reportNumber to record the specific report this dataset is about -->
         <ddm:reportNumber 
             valueURI="https://data.cultureelerfgoed.nl/term/id/abr/relevant-value-URI" 
-            schemeURI="https://data.cultureelerfgoed.nl/term/id/abr/7a99aaba-c1e7-49a4-9dd8-d295dbcc870e" 
+            schemeURI="https://data.cultureelerfgoed.nl/term/id/abr/2/7a99aaba-c1e7-49a4-9dd8-d295dbcc870e"
             subjectScheme="ABR Rapporten"
             reportNo="123">Report Series 123</ddm:reportNumber>
         
         
         <ddm:acquisitionMethod 
             subjectScheme="ABR verwervingswijzen" 
-            schemeURI="https://data.cultureelerfgoed.nl/term/id/abr/554ca1ec-3ed8-42d3-ae4b-47bcb848b238" 
+            schemeURI="https://data.cultureelerfgoed.nl/term/id/abr/2/554ca1ec-3ed8-42d3-ae4b-47bcb848b238"
             valueURI="https://data.cultureelerfgoed.nl/term/id/abr/relevant-value-URI">Booronderzoek</ddm:acquisitionMethod>
         
         <!-- Use explicitely typed values, when possible -->

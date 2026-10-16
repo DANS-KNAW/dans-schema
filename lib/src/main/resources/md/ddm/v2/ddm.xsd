@@ -464,7 +464,7 @@
     <xs:complexType name="ReportNumberType">
         <xs:complexContent>
             <xs:extension base="dc:SimpleLiteral">
-                <xs:attribute name="schemeURI" use="required" type="xs:anyURI" fixed="https://data.cultureelerfgoed.nl/term/id/abr/7a99aaba-c1e7-49a4-9dd8-d295dbcc870e">
+                <xs:attribute name="schemeURI" use="required" type="xs:anyURI" fixed="https://data.cultureelerfgoed.nl/term/id/abr/2/7a99aaba-c1e7-49a4-9dd8-d295dbcc870e">
                     <xs:annotation>
                         <xs:documentation>The URI of the scheme. For a SKOS scheme, the ConceptScheme in the 'skos:inScheme' value is expected</xs:documentation>
                     </xs:annotation>
@@ -497,7 +497,7 @@
     <xs:element name="acquisitionMethod" substitutionGroup="dcterms:subject" type="ddm:SubjectType">
         <xs:annotation>
             <xs:documentation xml:lang="en">Use this to describe the method of acquisition. Terms can be taken from a controlled vocabulary
-                like the ABR. See https://data.cultureelerfgoed.nl/term/id/abr/554ca1ec-3ed8-42d3-ae4b-47bcb848b238.html
+                like the ABR. See https://data.cultureelerfgoed.nl/term/id/abr/2/554ca1ec-3ed8-42d3-ae4b-47bcb848b238.html
             </xs:documentation>
         </xs:annotation>
     </xs:element>

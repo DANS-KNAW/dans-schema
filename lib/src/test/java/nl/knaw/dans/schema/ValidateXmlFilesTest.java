@@ -39,7 +39,9 @@ public class ValidateXmlFilesTest {
     void validate(File file, String schemaNameOrErrorMessage, SchemaValidator validator) throws Exception {
         assumeNoXmlLangReported(schemaNameOrErrorMessage);
         assumeFalse(null == validator, schemaNameOrErrorMessage);
-        assertThat(validator.validateFile(file)).isEmpty();
+        assertThat(validator.validateFile(file))
+            .as("XML file %s should validate against schema %s", file, schemaNameOrErrorMessage)
+            .isEmpty();
     }
 
     private static Stream<Arguments> provider() {
